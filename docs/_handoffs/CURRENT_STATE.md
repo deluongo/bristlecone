@@ -13,16 +13,16 @@ Seed document for any session (or successor model) picking up this project. Ceil
 | 1 | 2026-08-20 | M0-S1: repo founded — governance docs, spec v0 draft, templates, hygiene CI, ship script, founding records (name, envelope, license, records-dir, public-timing, constitution-adoption) | see records/ |
 | 2 | 2026-08-20 | M0-S2: operator rulings recorded — constitution ADOPTED, S1–S5 granted; treasury allocation deliberated (operator dissent preserved; outcome adoption-first-hybrid); founding-thesis record opened (stays open by design) | records/2026-08-20-{adopt-constitution,treasury-allocation,founding-thesis}.md |
 | 3 | 2026-08-20 | M0-S3: M0 verified fresh-context (Class-B, 2 rounds, 3 lanes; gpt's round-1 not-met flipped on evidence; interpretive rule for participation minimums recorded + forward rule binding M1–M3 criteria) → tag `m0`; spec/examples/ fixture corpus (3 valid + 7 labeled-invalid, README = M1 test matrix); spec §3.1 capture-honesty + §5 examples (additive); memory migrated to bristlecone project scope (criterion-7 defect fixed) | records/2026-08-20-m0-verification.md |
+| 5 | 2026-08-21 | M1-S2: `minimark.py` (stdlib markdown subset → HTML; all output escaped; unsafe link schemes degrade to text) + `render.py` (index + per-record pages; dissent computed per spec §3.1 and presented in its own panel with the dissenter's body section unedited; outcome box with option labels; full attribution; broken links marked; malformed files render raw behind a warning banner — lenient per spec §6) + `python -m bristlecone render ROOT -o OUT` (exit 0/2); 69 tests, coverage 100%, xenon B, ruff clean; ci.yml smoke-renders the archive; README status updated. Commit stamps (spec §4) deferred to M1-S3 with the Pages deploy | Class C — cites records/2026-08-20-record-envelope.md |
 | 4 | 2026-08-21 | M1-S1: `bristlecone/` package founded — `records.py` (lossless envelope parse/serialize, byte-identical round-trip on all 9 parseable fixtures) + `validate.py` (fail-closed: required cores, status vocab, ID grammar, dangling links, duplicate IDs; `--strict` adds lane attribution) + `python -m bristlecone validate` (exit contract 0/1/2); 44 tests green, coverage 100%, xenon B, ruff clean; ci.yml gates live (also validates fixture corpus + real archive per matrix); all 9 real M0 records pass `--strict`. Interpretive call, pinned by the fixture matrix: enforced ID grammar = charset rule (lowercase alnum + hyphens); `YYYY-MM-DD-` prefix stays convention (invalid fixtures' own filenames have no date prefix yet must fail only for their labeled defect) | Class C — cites records/2026-08-20-record-envelope.md |
 
 ## In flight
 
-*(none — session M1-S1 complete)*
+*(none — session M1-S2 complete)*
 
 ## Queued (weekend acceleration — operator requested faster cadence through the weekend)
 
-- M1-S2: `minimark.py` + `render` skeleton (index + record pages with dissent panel)
-- M1-S3: `validate --git-range` append-only CI check; pages.yml deploy; red-team test (edit a decided record on a branch → CI blocks)
+- M1-S3: `validate --git-range` append-only CI check; pages.yml deploy (this is where rendered pages get their spec §4 commit stamps); red-team test (edit a decided record on a branch → CI blocks)
 
 ## Open design decisions
 
@@ -31,7 +31,7 @@ Seed document for any session (or successor model) picking up this project. Ceil
 
 ## Test baseline
 
-44 tests, coverage 100% (floor 80), xenon B, ruff clean — all enforced in `.github/workflows/ci.yml` alongside the hygiene greps. Local runs use the gitignored `.venv/` (`python3 -m venv .venv && .venv/bin/pip install pytest pytest-cov ruff xenon`). The package itself is stdlib-only.
+69 tests, coverage 100% (floor 80), xenon B, ruff clean — all enforced in `.github/workflows/ci.yml` alongside the hygiene greps. Local runs use the gitignored `.venv/` (`python3 -m venv .venv && .venv/bin/pip install pytest pytest-cov ruff xenon`). The package itself is stdlib-only.
 
 ## Pointers
 

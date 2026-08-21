@@ -1,5 +1,8 @@
-"""CLI entry point. Exit-code contract: 0 = all records valid, 1 = findings,
-2 = usage or path error. Usage: python -m bristlecone validate [--strict] PATH...
+"""CLI entry point. Exit-code contract: 0 = success (validate: all records
+valid), 1 = findings, 2 = usage or path error.
+
+Usage: python -m bristlecone validate [--strict] PATH...
+       python -m bristlecone render RECORDS_DIR --out OUT_DIR
 """
 
 from __future__ import annotations
@@ -8,7 +11,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from . import records, validate
+from . import records, render, validate
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -23,8 +26,13 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="also require full attribution on tool-filled positions",
     )
+    render_parser = subparsers.add_parser(
+        "render", help="render a record tree to static HTML (lenient: content never fails it)"
+    )
+    render_parser.add_argument("root", type=Path, metavar="RECORDS_DIR")
+    render_parser.add_argument("-o", "--out", type=Path, required=True, metavar="OUT_DIR")
     args = parser.parse_args(argv)
-    return _cmd_validate(args)
+    return _cmd_validate(args) if args.command == "validate" else _cmd_render(args)
 
 
 def _cmd_validate(args: argparse.Namespace) -> int:
@@ -44,6 +52,15 @@ def _cmd_validate(args: argparse.Namespace) -> int:
         print(f"{len(findings)} finding(s) across {len(files)} file(s)")
         return 1
     print(f"OK: {len(files)} record(s) valid")
+    return 0
+
+
+def _cmd_render(args: argparse.Namespace) -> int:
+    if not args.root.is_dir():
+        print(f"bristlecone: no such directory: {args.root}", file=sys.stderr)
+        return 2
+    written = render.render_tree(args.root, args.out)
+    print(f"rendered {len(written) - 1} record page(s) + index -> {args.out}")
     return 0
 
 

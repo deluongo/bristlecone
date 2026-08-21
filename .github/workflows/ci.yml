@@ -27,3 +27,5 @@ jobs:
           fi
       - name: Validate the real archive (strict)
         run: python -m bristlecone validate --strict records/
+      - name: Smoke-render the real archive (lenient — must never fail on content)
+        run: python -m bristlecone render records/ -o /tmp/site
