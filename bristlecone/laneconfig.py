@@ -66,6 +66,19 @@ def load(path: Path) -> tuple[Lane, ...]:
 
 
 def _parse_lane(name: str, table: object) -> Lane:
+    kind = _checked_kind(name, table)
+    _check_attribution(name, table)
+    metered = _typed(name, table, "metered", bool, default=False)
+    argv, stdin = _parse_cmd(name, table) if kind == "cmd" else (None, False)
+    base_url = _parse_http(name, table, metered) if kind == "openai-http" else None
+    return Lane(
+        name=name, kind=kind, vendor=table["vendor"], model=table["model"], route=table["route"],
+        metered=metered, timeout=_parse_timeout(name, table), argv=argv, stdin=stdin,
+        base_url=base_url,
+    )
+
+
+def _checked_kind(name: str, table: object) -> str:
     if not isinstance(table, dict):
         raise ConfigError(f"lane {name}: not a table")
     kind = table.get("kind")
@@ -74,19 +87,20 @@ def _parse_lane(name: str, table: object) -> Lane:
     unknown = set(table) - _KIND_KEYS[kind]
     if unknown:
         raise ConfigError(f"lane {name}: unknown key(s) {sorted(unknown)} for kind {kind}")
+    return kind
+
+
+def _check_attribution(name: str, table: dict) -> None:
     for key in ATTRIBUTION:
         if not isinstance(table.get(key), str) or not table[key]:
             raise ConfigError(f"lane {name}: missing attribution key {key!r}")
-    metered = _typed(name, table, "metered", bool, default=False)
+
+
+def _parse_timeout(name: str, table: dict) -> float:
     timeout = float(_typed(name, table, "timeout", (int, float), default=DEFAULT_TIMEOUT))
     if timeout <= 0:
         raise ConfigError(f"lane {name}: timeout must be positive")
-    argv, stdin = _parse_cmd(name, table) if kind == "cmd" else (None, False)
-    base_url = _parse_http(name, table, metered) if kind == "openai-http" else None
-    return Lane(
-        name=name, kind=kind, vendor=table["vendor"], model=table["model"], route=table["route"],
-        metered=metered, timeout=timeout, argv=argv, stdin=stdin, base_url=base_url,
-    )
+    return timeout
 
 
 def _typed(name: str, table: dict, key: str, types: type | tuple, *, default: object) -> object:
@@ -97,13 +111,7 @@ def _typed(name: str, table: dict, key: str, types: type | tuple, *, default: ob
 
 
 def _parse_cmd(name: str, table: dict) -> tuple[tuple[str, ...], bool]:
-    argv = table.get("argv")
-    if (
-        not isinstance(argv, list)
-        or not argv
-        or not all(isinstance(arg, str) for arg in argv)
-    ):
-        raise ConfigError(f"lane {name}: cmd lanes need argv, a non-empty list of strings")
+    argv = _checked_argv(name, table)
     stdin = _typed(name, table, "stdin", bool, default=False)
     placeholders = sum(arg.count("{prompt}") for arg in argv)
     if stdin and placeholders:
@@ -113,6 +121,17 @@ def _parse_cmd(name: str, table: dict) -> tuple[tuple[str, ...], bool]:
             f"lane {name}: argv needs exactly one {{prompt}} placeholder (or stdin = true)"
         )
     return tuple(argv), stdin
+
+
+def _checked_argv(name: str, table: dict) -> list[str]:
+    argv = table.get("argv")
+    if (
+        not isinstance(argv, list)
+        or not argv
+        or not all(isinstance(arg, str) for arg in argv)
+    ):
+        raise ConfigError(f"lane {name}: cmd lanes need argv, a non-empty list of strings")
+    return argv
 
 
 def _parse_http(name: str, table: dict, metered: bool) -> str:
