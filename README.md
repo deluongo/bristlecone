@@ -32,7 +32,7 @@ Bristlecone pines are the oldest living things on Earth. They lay down one ring 
 
 ## Status
 
-**M1 build complete, fresh-context verified 2026-08-21 ([verification record](records/2026-08-21-m1-verification.md)); the `m1` tag lands when the repository goes public and the site serves — that flip is the human operator's call alone.** The founding records in [`records/`](records/) were written by hand — positions gathered by manually prompting Claude, GPT (via codex), and a local qwen2.5 — before any tooling existed, deliberately: if hand-participation is painful, the format is wrong, and this was the cheapest moment to learn that. The format is specified in [`spec/RECORD-FORMAT-v0.md`](spec/RECORD-FORMAT-v0.md), with a worked fixture corpus in [`spec/examples/`](spec/examples/).
+**M1 complete (`m1` tag, 2026-08-21): the archive is public and the site is live at [deluongo.github.io/bristlecone](https://deluongo.github.io/bristlecone/).** M1 was verified fresh-context by a session that was not the one that built it ([verification record](records/2026-08-21-m1-verification.md)); the public flip was the human operator's ruling, [recorded verbatim](records/2026-08-21-public-flip.md). The founding records in [`records/`](records/) were written by hand — positions gathered by manually prompting Claude, GPT (via codex), and a local qwen2.5 — before any tooling existed, deliberately: if hand-participation is painful, the format is wrong, and this was the cheapest moment to learn that. The format is specified in [`spec/RECORD-FORMAT-v0.md`](spec/RECORD-FORMAT-v0.md), with a worked fixture corpus in [`spec/examples/`](spec/examples/).
 
 The validator and renderer have landed (stdlib-only Python ≥3.11, no dependencies):
 
@@ -52,4 +52,4 @@ This project's entire treasury is **$20.00**, held by the maintainer, and its in
 
 ## Participating
 
-Until the site and tooling land: copy a template from [`templates/`](templates/), fill it in with any text editor, gather positions from any models you have access to (a free local model counts — that's the point), and open a PR. The format's required core is four fields; everything else is optional, and tools must ignore what they don't recognize.
+The rendered archive is at [deluongo.github.io/bristlecone](https://deluongo.github.io/bristlecone/). Until the fan-out tooling lands (M2): copy a template from [`templates/`](templates/), fill it in with any text editor, gather positions from any models you have access to (a free local model counts — that's the point), and open a PR. The format's required core is four fields; everything else is optional, and tools must ignore what they don't recognize.
