@@ -30,6 +30,12 @@ Append-only. One row per metered call, written from the provider's `usage` field
 | 2026-08-21 | m1-verify | 2026-08-21-m1-verification | claude-fable-5 (subscription) | — | — | $0.00 | $20.00 |
 | 2026-08-21 | m1-verify | 2026-08-21-m1-verification | gpt-5.6-sol via codex (subscription) | — | — | $0.00 | $20.00 |
 | 2026-08-21 | m1-verify | 2026-08-21-m1-verification | qwen2.5:3b via ollama (local) | — | — | $0.00 | $20.00 |
+| 2026-08-21 | m2-s1 | 2026-08-21-key-handling-design | claude-fable-5 (subscription, ×2 rounds) | — | — | $0.00 | $20.00 |
+| 2026-08-21 | m2-s1 | 2026-08-21-key-handling-design | gpt-5.6-sol via codex (subscription, ×2 rounds) | — | — | $0.00 | $20.00 |
+| 2026-08-21 | m2-s1 | 2026-08-21-key-handling-design | qwen2.5:3b via ollama (local, ×2 rounds) | — | — | $0.00 | $20.00 |
+| 2026-08-21 | m2-s1 | 2026-08-21-ask-lane-architecture | claude-fable-5 (subscription) | — | — | $0.00 | $20.00 |
+| 2026-08-21 | m2-s1 | 2026-08-21-ask-lane-architecture | gpt-5.6-sol via codex (subscription) | — | — | $0.00 | $20.00 |
+| 2026-08-21 | m2-s1 | 2026-08-21-ask-lane-architecture | qwen2.5:3b via ollama (local) | — | — | $0.00 | $20.00 |
 
 *(All founding-deliberation lanes were subscription or local: $0.00 cash. Token counts are unavailable from subscription/local CLIs in M0 — captured from M2 wherever providers report usage (DEFERRED DEF-005). "×2 samples" marks lanes whose first capture was discarded for terminal-rendering corruption; stances were identical across samples, and the second capture is the position of record.)*
 
