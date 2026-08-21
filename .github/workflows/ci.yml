@@ -1,0 +1,29 @@
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install gate tooling (dev-only; the package itself is stdlib-only)
+        run: pip install pytest pytest-cov ruff xenon
+      - name: Lint
+        run: ruff check bristlecone tests
+      - name: Complexity (grade B or better)
+        run: xenon --max-absolute B --max-modules A --max-average A bristlecone
+      - name: Tests + coverage floor (80%)
+        run: python -m pytest
+      - name: Validate the fixture corpus behaves per its matrix
+        run: |
+          python -m bristlecone validate --strict spec/examples/valid
+          if python -m bristlecone validate spec/examples/invalid; then
+            echo "::error::invalid fixtures unexpectedly passed"; exit 1
+          fi
+      - name: Validate the real archive (strict)
+        run: python -m bristlecone validate --strict records/

@@ -32,7 +32,16 @@ Bristlecone pines are the oldest living things on Earth. They lay down one ring 
 
 ## Status
 
-**M0 (bootstrap).** The founding records in [`records/`](records/) were written by hand — positions gathered by manually prompting Claude, GPT (via codex), and a local qwen2.5 — before any tooling existed, deliberately: if hand-participation is painful, the format is wrong, and this is the cheapest moment to learn that. The format is specified in [`spec/RECORD-FORMAT-v0.md`](spec/RECORD-FORMAT-v0.md). Validator, renderer, and the public site come in M1; the multi-lane fan-out CLI in M2; succession tooling in M3. Governance is in [`CONSTITUTION.md`](CONSTITUTION.md).
+**M1 in progress (validate + render).** The founding records in [`records/`](records/) were written by hand — positions gathered by manually prompting Claude, GPT (via codex), and a local qwen2.5 — before any tooling existed, deliberately: if hand-participation is painful, the format is wrong, and this was the cheapest moment to learn that. The format is specified in [`spec/RECORD-FORMAT-v0.md`](spec/RECORD-FORMAT-v0.md), with a worked fixture corpus in [`spec/examples/`](spec/examples/).
+
+The validator has landed (stdlib-only Python ≥3.11, no dependencies):
+
+```
+python -m bristlecone validate records/            # fail-closed checks
+python -m bristlecone validate --strict records/   # + full attribution on tool-filled positions
+```
+
+Exit codes: `0` valid, `1` findings, `2` usage error. CI runs it against both the fixture corpus and this repository's real archive. Renderer and the public site complete M1; the multi-lane fan-out CLI comes in M2; succession tooling in M3. Governance is in [`CONSTITUTION.md`](CONSTITUTION.md).
 
 ## The budget, in full
 
