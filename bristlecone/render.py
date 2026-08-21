@@ -4,8 +4,9 @@ Emits ``index.html`` plus one page per record file. Dissent is computed, never
 declared (spec §3.1): every position whose stance differs from the outcome's
 decision is presented first-class and unedited in a panel of its own. A file
 that fails to parse renders as raw text behind a warning banner — a foreign
-record never crashes the site. Broken links are marked, not fatal. Commit
-stamps (spec §4) arrive with the Pages deploy in M1-S3.
+record never crashes the site. Broken links are marked, not fatal. When commit
+stamps (spec §4) are supplied, each page names the commit that first introduced
+its record; this module never runs git itself — gitio computes the stamps.
 """
 
 from __future__ import annotations
@@ -13,8 +14,12 @@ from __future__ import annotations
 import html
 import re
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from . import minimark, records
+
+if TYPE_CHECKING:  # annotation-only import keeps render free of subprocess machinery
+    from .gitio import Stamp
 
 DISCLAIMER = (
     "Positions in these records are a model's output under the recorded parameters — "
@@ -45,31 +50,52 @@ _CSS = (
 _ATTRIBUTION_KEYS = ("stance", "vendor", "model", "model_version", "route", "lane", "gathered")
 
 
-def render_tree(root: Path, out_dir: Path) -> list[Path]:
+def render_tree(
+    root: Path,
+    out_dir: Path,
+    stamps: dict[str, Stamp] | None = None,
+    built_from: Stamp | None = None,
+) -> list[Path]:
     """Render every record under ``root`` into ``out_dir``; returns written paths
-    (index first). Never raises on record content — lenient by contract."""
+    (index first). Never raises on record content — lenient by contract.
+    ``stamps`` (record ID -> first-introduced commit) and ``built_from`` add the
+    spec §4 commit stamps to page footers when supplied."""
     paths = records.scan_tree(root)
     known_ids = {p.stem for p in paths}
     out_dir.mkdir(parents=True, exist_ok=True)
     entries: list[tuple[str, dict | None]] = []
     written: list[Path] = []
     for path in paths:
+        stamp_line = _stamp_line(stamps, path.stem)
         try:
             record = records.load_file(path)
-            page = _record_page(record, known_ids)
+            page = _record_page(record, known_ids, stamp_line)
             entries.append((record.id, record.front))
         except records.RecordParseError as exc:
-            page = _malformed_page(path.stem, str(exc), path.read_text(encoding="utf-8"))
+            raw = path.read_text(encoding="utf-8")
+            page = _malformed_page(path.stem, str(exc), raw, stamp_line)
             entries.append((path.stem, None))
         target = out_dir / f"{path.stem}.html"
         target.write_text(page, encoding="utf-8")
         written.append(target)
     index = out_dir / "index.html"
-    index.write_text(_index_page(entries), encoding="utf-8")
+    built_line = f"Built from commit {built_from.sha} ({built_from.date})." if built_from else ""
+    index.write_text(_index_page(entries, built_line), encoding="utf-8")
     return [index, *written]
 
 
-def _record_page(record: records.Record, known_ids: set[str]) -> str:
+def _stamp_line(stamps: dict[str, Stamp] | None, record_id: str) -> str:
+    """The footer's provenance sentence (spec §4). ``stamps=None`` means the
+    render was not asked to stamp; a stamped render marks uncommitted files."""
+    if stamps is None:
+        return ""
+    stamp = stamps.get(record_id)
+    if stamp is None:
+        return "First introduced: not yet committed."
+    return f"First introduced in commit {stamp.sha} ({stamp.date})."
+
+
+def _record_page(record: records.Record, known_ids: set[str], stamp_line: str = "") -> str:
     front = record.front
     title = front.get("question") or front.get("re") or front.get("occasion") or record.id
     parts = [
@@ -81,12 +107,12 @@ def _record_page(record: records.Record, known_ids: set[str]) -> str:
         _positions_html(front),
         _dissent_html(record),
         f'<article class="body">{minimark.to_html(record.body)}</article>',
-        _footer(),
+        _footer(stamp_line),
     ]
     return _page(record.id, "\n".join(p for p in parts if p))
 
 
-def _malformed_page(stem: str, message: str, raw: str) -> str:
+def _malformed_page(stem: str, message: str, raw: str, stamp_line: str = "") -> str:
     body = "\n".join(
         (
             '<p class="crumb"><a href="index.html">&larr; index</a></p>',
@@ -94,20 +120,20 @@ def _malformed_page(stem: str, message: str, raw: str) -> str:
             f'<div class="warning">This file does not parse as a record ({_text(message)}). '
             "Shown unmodified as raw text — lenient mode, spec §6.</div>",
             f"<pre>{html.escape(raw)}</pre>",
-            _footer(),
+            _footer(stamp_line),
         )
     )
     return _page(stem, body)
 
 
-def _index_page(entries: list[tuple[str, dict | None]]) -> str:
+def _index_page(entries: list[tuple[str, dict | None]], built_line: str = "") -> str:
     newest_first = sorted(entries, key=lambda e: e[0], reverse=True)
     rows = [_index_row(rid, front) for rid, front in newest_first]
     table = (
         "<table><thead><tr><th>record</th><th>type</th><th>status</th><th>subject</th></tr>"
         f"</thead><tbody>{''.join(rows)}</tbody></table>"
     )
-    body = f"<h1>Bristlecone — deliberation archive</h1>\n{table}\n{_footer()}"
+    body = f"<h1>Bristlecone — deliberation archive</h1>\n{table}\n{_footer(built_line)}"
     return _page("Bristlecone archive", body)
 
 
@@ -253,8 +279,9 @@ def _text(value: object) -> str:
     return html.escape(str(value))
 
 
-def _footer() -> str:
-    return f"<footer><p>{DISCLAIMER}</p></footer>"
+def _footer(stamp_line: str = "") -> str:
+    stamp = f'<p class="stamp">{_text(stamp_line)}</p>' if stamp_line else ""
+    return f"<footer>{stamp}<p>{DISCLAIMER}</p></footer>"
 
 
 def _page(title: str, body: str) -> str:

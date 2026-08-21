@@ -140,3 +140,26 @@ def test_cli_render_exit_contract(tmp_path: Path) -> None:
     assert main(["render", str(VALID), "--out", str(out)]) == 0
     assert (out / "index.html").exists()
     assert main(["render", str(tmp_path / "missing"), "--out", str(out)]) == 2
+
+
+def test_stamped_pages_show_first_introduced_commit(tmp_path: Path) -> None:
+    from bristlecone.gitio import Stamp
+
+    out = tmp_path / "site"
+    stamps = {CANONICAL: Stamp(sha="abc1234", date="2026-01-15")}
+    built = Stamp(sha="beef987", date="2026-08-21")
+    render.render_tree(VALID, out, stamps=stamps, built_from=built)
+    page = (out / f"{CANONICAL}.html").read_text(encoding="utf-8")
+    assert "First introduced in commit abc1234 (2026-01-15)." in page
+    index = (out / "index.html").read_text(encoding="utf-8")
+    assert "Built from commit beef987 (2026-08-21)." in index
+    # a stamped render marks records the stamp map does not cover
+    other = (out / "2026-01-16-example-handoff.html").read_text(encoding="utf-8")
+    assert "not yet committed" in other
+
+
+def test_unstamped_render_has_no_stamp_lines(tmp_path: Path) -> None:
+    out, _ = rendered(tmp_path, VALID)
+    page = (out / f"{CANONICAL}.html").read_text(encoding="utf-8")
+    assert "First introduced" not in page
+    assert "not yet committed" not in page

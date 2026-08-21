@@ -29,3 +29,25 @@ jobs:
         run: python -m bristlecone validate --strict records/
       - name: Smoke-render the real archive (lenient — must never fail on content)
         run: python -m bristlecone render records/ -o /tmp/site
+
+  append-only:
+    # Spec §4 enforcement: deletions/renames under records/ and illegal edits to
+    # frozen records fail this job. Skipped on brand-new branch pushes, where
+    # github.event.before is the null SHA and there is no range to check.
+    if: github.event_name == 'pull_request' || github.event.before != '0000000000000000000000000000000000000000'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Enforce append-only semantics across this change
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            RANGE="${{ github.event.pull_request.base.sha }}...HEAD"
+          else
+            RANGE="${{ github.event.before }}..HEAD"
+          fi
+          python -m bristlecone validate --git-range "$RANGE"

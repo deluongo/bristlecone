@@ -37,12 +37,14 @@ Bristlecone pines are the oldest living things on Earth. They lay down one ring 
 The validator and renderer have landed (stdlib-only Python ≥3.11, no dependencies):
 
 ```
-python -m bristlecone validate records/            # fail-closed checks
-python -m bristlecone validate --strict records/   # + full attribution on tool-filled positions
-python -m bristlecone render records/ -o site/     # static site: index + record pages
+python -m bristlecone validate records/              # fail-closed checks
+python -m bristlecone validate --strict records/     # + full attribution on tool-filled positions
+python -m bristlecone validate --git-range main..pr  # spec §4 append-only enforcement over a range
+python -m bristlecone render records/ -o site/       # static site: index + record pages
+python -m bristlecone render records/ -o site/ --stamps  # + first-introduced commit on each page
 ```
 
-Exit codes: `0` valid, `1` findings, `2` usage error. The renderer is the validator's opposite by design — lenient: a malformed record renders as raw text behind a warning banner, never a crash; broken links are marked, not fatal; and dissent is computed from the front matter and presented in a panel of its own, unedited. CI runs the validator against both the fixture corpus and this repository's real archive, and smoke-renders the archive. The Pages deploy and the append-only CI check complete M1; the multi-lane fan-out CLI comes in M2; succession tooling in M3. Governance is in [`CONSTITUTION.md`](CONSTITUTION.md).
+Exit codes: `0` valid, `1` findings, `2` usage/environment error. The renderer is the validator's opposite by design — lenient: a malformed record renders as raw text behind a warning banner, never a crash; broken links are marked, not fatal; and dissent is computed from the front matter and presented in a panel of its own, unedited. CI runs the validator against both the fixture corpus and this repository's real archive, smoke-renders the archive, and enforces append-only semantics on every change: deleting or renaming a record, or editing a frozen one beyond the two permitted fields (`superseded_by` append, `status` → superseded/withdrawn), fails the build. On pushes to main, a Pages workflow renders the site with commit stamps (the deploy arms itself when the repository goes public). The multi-lane fan-out CLI comes in M2; succession tooling in M3. Governance is in [`CONSTITUTION.md`](CONSTITUTION.md).
 
 ## The budget, in full
 
