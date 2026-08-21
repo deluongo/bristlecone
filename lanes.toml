@@ -1,0 +1,39 @@
+# Bristlecone lane config — lanes are data over exactly two transport kinds
+# (records/2026-08-21-ask-lane-architecture.md). Hand-edit freely; the loader
+# is fail-closed: unknown keys and unknown kinds are errors, not surprises.
+#
+# The metered lane refuses `declined:gate` until the operator opens the
+# KEY-HANDLING gate (docs/KEY-HANDLING.md §7); its keyed transport then runs
+# from the operator-pinned client, never from this repository's code.
+
+[lane.claude]
+kind = "cmd"
+vendor = "anthropic"
+model = "claude-fable-5"
+route = "subscription-cli"
+argv = ["claude", "-p", "{prompt}"]
+timeout = 600
+
+[lane.codex]
+kind = "cmd"
+vendor = "openai"
+model = "gpt-5.6-sol"
+route = "subscription-cli"
+argv = ["codex", "exec", "--sandbox", "read-only", "--skip-git-repo-check", "{prompt}"]
+timeout = 600
+
+[lane.qwen]
+kind = "openai-http"
+vendor = "alibaba"
+model = "qwen2.5:3b-instruct"
+route = "local"
+base_url = "http://localhost:11434/v1"
+timeout = 300
+
+[lane.deepseek]
+kind = "openai-http"
+vendor = "deepseek"
+model = "deepseek-chat"
+route = "metered-api"
+base_url = "https://api.deepseek.com/v1"
+metered = true

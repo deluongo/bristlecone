@@ -4,6 +4,7 @@ valid), 1 = findings, 2 = usage, path, or git error.
 Usage: python -m bristlecone validate [--strict] PATH...
        python -m bristlecone validate --git-range BASE..HEAD [--repo DIR]
        python -m bristlecone render RECORDS_DIR --out OUT_DIR [--stamps]
+       python -m bristlecone lanes [--config lanes.toml]
 """
 
 from __future__ import annotations
@@ -12,7 +13,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from . import gitio, records, render, validate
+from . import gitio, laneconfig, records, render, validate
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -46,8 +47,15 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="stamp pages with first-introduced commits (spec §4); RECORDS_DIR must be in a repo",
     )
+    lanes_parser = subparsers.add_parser(
+        "lanes", help="validate and list the lane config (fail-closed)"
+    )
+    lanes_parser.add_argument(
+        "--config", type=Path, default=Path("lanes.toml"), help="lane config (default: lanes.toml)"
+    )
     args = parser.parse_args(argv)
-    return _cmd_validate(args) if args.command == "validate" else _cmd_render(args)
+    commands = {"validate": _cmd_validate, "render": _cmd_render, "lanes": _cmd_lanes}
+    return commands[args.command](args)
 
 
 def _cmd_validate(args: argparse.Namespace) -> int:
@@ -92,6 +100,22 @@ def _report(findings: list[validate.Finding]) -> bool:
     if findings:
         print(f"{len(findings)} finding(s)")
     return bool(findings)
+
+
+def _cmd_lanes(args: argparse.Namespace) -> int:
+    if not args.config.is_file():
+        print(f"bristlecone: no such file: {args.config}", file=sys.stderr)
+        return 2
+    try:
+        lanes = laneconfig.load(args.config)
+    except laneconfig.ConfigError as exc:
+        print(f"bristlecone: {exc}", file=sys.stderr)
+        return 1
+    for lane in lanes:
+        spend = "metered -> declined:gate (KEY-HANDLING gate closed)" if lane.metered else "$0"
+        print(f"{lane.name:<10} {lane.kind:<12} {lane.vendor}/{lane.model} [{lane.route}] {spend}")
+    print(f"OK: {len(lanes)} lane(s) valid")
+    return 0
 
 
 def _cmd_render(args: argparse.Namespace) -> int:
