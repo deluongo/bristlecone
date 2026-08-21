@@ -11,20 +11,22 @@ M0 bootstrap (week 1): found the project — governance, spec draft, founding re
 | # | Date | Step | Outcome |
 |---|---|---|---|
 | 1 | 2026-08-20 | M0-S1: repo founded — governance docs, spec v0 draft, templates, hygiene CI, ship script, founding records (name, envelope, license, records-dir, public-timing, constitution-adoption) | see records/ |
+| 2 | 2026-08-20 | M0-S2: operator rulings recorded — constitution ADOPTED, S1–S5 granted; treasury allocation deliberated (operator dissent preserved; outcome adoption-first-hybrid); founding-thesis record opened (stays open by design) | records/2026-08-20-{adopt-constitution,treasury-allocation,founding-thesis}.md |
 
 ## In flight
 
-*(none — session M0-S1 complete)*
+*(none — session M0-S2 complete)*
 
-## Queued (M0 remainder)
+## Queued (weekend acceleration — operator requested faster cadence through the weekend)
 
-- M0-S2: spec/examples/ — one canonical valid record + labeled-invalid fixtures; refine spec from hand-writing experience; open the dead-man-routine design note
-- M0-S3: operator weekend review — record rulings on CONSTITUTION + STANDING_AUTHORIZATIONS as operator-ruling records; close M0 checklist (exit criteria in plan)
+- M0-S3: fresh-context M0 verification against exit criteria → tag `m0`; spec/examples/ (one canonical valid + labeled-invalid fixtures); spec refinements from hand-writing experience
+- M1-S1: `bristlecone/records.py` (parse/serialize round-trip) + `validate` core (required fields, status vocab, ID grammar, links) — tests-first, coverage/xenon/ruff gates activate
+- M1-S2: `minimark.py` + `render` skeleton (index + record pages with dissent panel)
 
 ## Open design decisions
 
-- `records/2026-08-20-adopt-constitution.md` — **open**, awaits operator ruling (weekend review)
-- Dead-man routine implementation detail (post-flip, S6 granted): design note queued for M0-S2
+- Dead-man routine (post-flip, S6 granted): **channel = Telegram bot** per operator suggestion 2026-08-20; bot creation is an account-creation forever-ask, handled at flip time
+- Treasury: adoption costs hold first claim (see `records/2026-08-20-treasury-allocation.md`); first candidate = domain at public flip, decided then
 
 ## Test baseline
 
