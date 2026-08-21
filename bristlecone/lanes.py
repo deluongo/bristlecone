@@ -50,8 +50,15 @@ def run(lane: Lane, prompt: str, *, dry_run: bool = False) -> LaneResult:
 
 
 def _fixture(lane: Lane, prompt: str) -> LaneResult:
+    # The fixture answers in the ask reply grammar so a dry-run exercises the
+    # full downstream pipeline (parse -> scrub -> record assembly), not just
+    # the transport swap. "abstain" is always a legal stance.
     digest = hashlib.sha256(prompt.encode()).hexdigest()
-    text = f"[dry-run:{lane.kind}] lane={lane.name} prompt-sha256={digest}"
+    text = (
+        "STANCE: abstain\n"
+        f"SUMMARY: [dry-run:{lane.kind}] deterministic fixture for lane {lane.name}.\n"
+        f"ARGUMENTS: prompt-sha256={digest}; no transport was touched."
+    )
     return LaneResult(lane.name, "dry-run", text)
 
 

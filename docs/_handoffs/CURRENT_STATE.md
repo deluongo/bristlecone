@@ -10,6 +10,7 @@ Seed document for any session (or successor model) picking up this project. Ceil
 
 | # | Date | Step | Outcome |
 |---|---|---|---|
+| 11 | 2026-08-21 | **M2-S3: `ask` orchestrator** — `ask.py` implements the pinned pipeline (build prompt → outbound scrub gate → transport → parse/validate → one repair reprompt through the same gate → inbound scrub → commit): fills attributed positions into an *existing open* deliberation record only (never creates/decides; terminal statuses refused per spec §4), appends `[[positions]]` stanzas + `## Position:` body sections with a fail-closed reparse before emitting; outbound gate dispatches NOTHING on any scrub hit and reports codes only; prompt carries question/options/Context only (independence — never other positions); capture honesty: failed lanes recorded in `gathered` with no stance, format-failures preserve the scrubbed capture unedited, stance case-normalization noted. `ask` CLI subcommand (`--lanes` subset, `--denylist`, `--dry-run` never writes the record — `--out` for the assembled copy; real runs update in place). Dry-run fixtures now answer in the reply grammar so `--dry-run` exercises parse→scrub→assembly end-to-end (all 4 repo lanes fill, incl. metered at $0; assembled record strict-valid). Metering stays out of repo code by design — caps live in the future pinned client (KEY-HANDLING §3). 206 tests, coverage 100%, xenon B/A/A, ruff clean | Class C — cites records/2026-08-21-ask-lane-architecture.md |
 | 10 | 2026-08-21 | **M2-S2: lane substrate** — `scrub.py` (secret-shape + entropy-blob + local-denylist filters; markers only, hit reports never quote the match; idempotent; commit-SHA/sha256 hex provably untouched), `laneconfig.py` (fail-closed TOML loader: unknown keys/kinds are errors; interpretive pin — keyless `openai-http` must target loopback, remote = metered/BYOK = pinned-client territory), `lanes.py` (two transports: `cmd` argv-no-shell, `openai-http` urllib **never sending an Authorization header**; metered → `declined:gate` before any transport; `dry_run` fixtures keyed by kind with tests trapping subprocess/network/env access; failures classified, never fabricated), repo `lanes.toml` (claude/codex/qwen/deepseek), `lanes` CLI subcommand. 170 tests, coverage 100%, xenon B, ruff clean. Credential-shape source strings split so the hygiene grep never matches the scrubber's own defense | Class C — cites records/2026-08-21-{key-handling-design,ask-lane-architecture}.md |
 | 1 | 2026-08-20 | M0-S1: repo founded — governance docs, spec v0 draft, templates, hygiene CI, ship script, founding records (name, envelope, license, records-dir, public-timing, constitution-adoption) | see records/ |
 | 2 | 2026-08-20 | M0-S2: operator rulings recorded — constitution ADOPTED, S1–S5 granted; treasury allocation deliberated (operator dissent preserved; outcome adoption-first-hybrid); founding-thesis record opened (stays open by design) | records/2026-08-20-{adopt-constitution,treasury-allocation,founding-thesis}.md |
@@ -23,11 +24,12 @@ Seed document for any session (or successor model) picking up this project. Ceil
 
 ## In flight
 
-*(none — M2-S2 done)*
+*(none — M2-S3 done)*
 
 ## Queued (weekend acceleration still in effect)
 
-- **M2-S3 candidate**: the `ask` orchestrator (prompt build → outbound scrub gate → lanes.run → inbound scrub → fill attributed positions into an existing record, never create/decide one; one repair reprompt; `--dry-run` end-to-end) and/or the `bristlecone-ask` pinned-client entrypoint + hook patch in `docs/patches/` (KEY-HANDLING §4 says the patch ships with the M2 client). KEY-HANDLING.md approval can arrive via INBOX any time — the operator checklist is §7 of the doc.
+- **M2-S4 candidate**: the `bristlecone-ask` pinned-client entrypoint + hook patch in `docs/patches/` (KEY-HANDLING §4 says the patch ships with the M2 client; §3 closed-boundary conditions bind it: self-contained, no repo imports/config, fixed API origin, in-artifact caps with reserve-then-reconcile, sanitized errors, hash-compare key verification). KEY-HANDLING.md approval can arrive via INBOX any time — the operator checklist is §7 of the doc.
+- **First real (keyless) `ask` fan-out**: use `ask` on a genuine open deliberation (e.g. the dissent-panel-placement refinement below) — dogfood the tool the way M0 dogfooded hand-writing.
 - **Operator asks pending (for a weekend INBOX read, not urgent)**: KEY-HANDLING.md approval (gates first metered call, needs hook install + client pin when M2 client exists); Telegram bot creation for the dead-man routine (S6 granted, bot creation is an operator act).
 - **Telegram dead-man bot** (S6 granted for the routine; the bot account creation is an operator act via @BotFather — ask when he has a minute, it was offered post-flip).
 - **Domain decision** (treasury first claim per `records/2026-08-20-treasury-allocation.md`) — deliberate whether/when; site works fine on github.io at $0.
@@ -41,7 +43,7 @@ Seed document for any session (or successor model) picking up this project. Ceil
 
 ## Test baseline
 
-103 tests, coverage 100% (floor 80), xenon B, ruff clean — all enforced in `.github/workflows/ci.yml` alongside the hygiene greps. Local runs use the gitignored `.venv/` (`python3 -m venv .venv && .venv/bin/pip install pytest pytest-cov ruff xenon`). The package itself is stdlib-only.
+206 tests, coverage 100% (floor 80), xenon B (module avg A), ruff clean — all enforced in `.github/workflows/ci.yml` alongside the hygiene greps. Local runs use the gitignored `.venv/` (`python3 -m venv .venv && .venv/bin/pip install pytest pytest-cov ruff xenon`). The package itself is stdlib-only.
 
 ## Pointers
 

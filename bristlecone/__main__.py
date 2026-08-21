@@ -5,6 +5,11 @@ Usage: python -m bristlecone validate [--strict] PATH...
        python -m bristlecone validate --git-range BASE..HEAD [--repo DIR]
        python -m bristlecone render RECORDS_DIR --out OUT_DIR [--stamps]
        python -m bristlecone lanes [--config lanes.toml]
+       python -m bristlecone ask RECORD [--config lanes.toml] [--lanes NAMES]
+                                        [--dry-run [--out PATH]] [--denylist PATH]
+
+For `ask`, a config that cannot be loaded is a usage-class error (2), unlike
+`lanes` where the config is itself the subject under validation (1).
 """
 
 from __future__ import annotations
@@ -13,7 +18,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from . import gitio, laneconfig, records, render, validate
+from . import ask, gitio, laneconfig, records, render, scrub, validate
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -53,8 +58,39 @@ def main(argv: list[str] | None = None) -> int:
     lanes_parser.add_argument(
         "--config", type=Path, default=Path("lanes.toml"), help="lane config (default: lanes.toml)"
     )
+    ask_parser = subparsers.add_parser(
+        "ask",
+        help="fan an open record's question out to lanes and fill attributed "
+        "positions (never creates or decides a record)",
+    )
+    ask_parser.add_argument("record", type=Path, metavar="RECORD")
+    ask_parser.add_argument(
+        "--config", type=Path, default=Path("lanes.toml"), help="lane config (default: lanes.toml)"
+    )
+    ask_parser.add_argument(
+        "--lanes", metavar="NAME[,NAME...]", help="subset of configured lanes (default: all)"
+    )
+    ask_parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="deterministic fixtures, no transport; the record file is never written",
+    )
+    ask_parser.add_argument(
+        "--out", type=Path, help="dry-run only: write the would-be updated record here"
+    )
+    ask_parser.add_argument(
+        "--denylist",
+        type=Path,
+        default=Path("denylist.local.txt"),
+        help="local denylist for the scrub gates (absent file = no terms)",
+    )
     args = parser.parse_args(argv)
-    commands = {"validate": _cmd_validate, "render": _cmd_render, "lanes": _cmd_lanes}
+    commands = {
+        "validate": _cmd_validate,
+        "render": _cmd_render,
+        "lanes": _cmd_lanes,
+        "ask": _cmd_ask,
+    }
     return commands[args.command](args)
 
 
@@ -133,6 +169,56 @@ def _cmd_render(args: argparse.Namespace) -> int:
     written = render.render_tree(args.root, args.out, stamps=stamps, built_from=built_from)
     print(f"rendered {len(written) - 1} record page(s) + index -> {args.out}")
     return 0
+
+
+def _cmd_ask(args: argparse.Namespace) -> int:
+    if args.out and not args.dry_run:
+        print("bristlecone: --out is dry-run only (real runs update RECORD in place)",
+              file=sys.stderr)
+        return 2
+    try:
+        lane_list = _selected_lanes(args)
+        record = records.load_file(args.record)
+    except (OSError, laneconfig.ConfigError, records.RecordParseError, LookupError) as exc:
+        print(f"bristlecone: {exc}", file=sys.stderr)
+        return 2
+    denylist = scrub.load_denylist(args.denylist)
+    try:
+        result = ask.run_ask(record, lane_list, denylist, dry_run=args.dry_run)
+    except ask.AskError as exc:
+        print(f"bristlecone: {exc}", file=sys.stderr)
+        return 2
+    except ask.OutboundBlocked as exc:
+        print(f"bristlecone: {exc} — nothing was dispatched", file=sys.stderr)
+        return 1
+    return _finish_ask(args, result)
+
+
+def _selected_lanes(args: argparse.Namespace) -> tuple[laneconfig.Lane, ...]:
+    lane_list = laneconfig.load(args.config)
+    if not args.lanes:
+        return lane_list
+    by_name = {lane.name: lane for lane in lane_list}
+    try:
+        return tuple(by_name[name] for name in args.lanes.split(","))
+    except KeyError as exc:
+        raise LookupError(f"no lane named {exc.args[0]!r} in {args.config}") from exc
+
+
+def _finish_ask(args: argparse.Namespace, result: ask.AskResult) -> int:
+    for report in result.reports:
+        hits = ",".join(report.hits) or "-"
+        print(f"{report.lane:<10} {report.status:<26} stance={report.stance or '-'} scrub={hits}")
+    if args.dry_run:
+        if args.out:
+            args.out.write_text(result.text, encoding="utf-8")
+            print(f"dry-run: assembled record written to {args.out} (RECORD untouched)")
+        else:
+            print("dry-run: RECORD untouched (use --out PATH to inspect the assembled record)")
+    else:
+        args.record.write_text(result.text, encoding="utf-8")
+        print(f"updated {args.record}")
+    return 0 if result.all_filled else 1
 
 
 if __name__ == "__main__":
