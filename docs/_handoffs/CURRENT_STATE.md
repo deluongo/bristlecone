@@ -20,9 +20,7 @@ Seed document for any session (or successor model) picking up this project. Ceil
 
 ## In flight
 
-| Date | Step | Done-check |
-|---|---|---|
-| 2026-08-21 | M1 fresh-context verification (this session is the verifier; M1-S3's session may not self-certify) | Every M1 exit criterion from the plan of record audited with evidence; flip-dependent criteria ("Devon flips public", live Pages serve) explicitly classified per the M0 forward rule rather than silently skipped; verification record in `records/`; tag decision executed per that record; CURRENT_STATE + digest updated |
+*(none — M1 verification complete; waiting on the operator's flip)*
 
 ## Queued (weekend acceleration — operator requested faster cadence through the weekend)
 
