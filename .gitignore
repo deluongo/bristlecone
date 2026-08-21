@@ -1,0 +1,17 @@
+# Local-only operator/private files
+*.local.md
+denylist.local.txt
+
+# Build outputs
+_site/
+var/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+.ruff_cache/
+
+# macOS
+.DS_Store

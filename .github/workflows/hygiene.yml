@@ -1,0 +1,39 @@
+name: hygiene
+on:
+  push:
+  pull_request:
+
+jobs:
+  secret-shapes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan tracked files for credential shapes
+        # Patterns are assembled from character classes so this file never trips its own scan
+        # (a lesson inherited from the operator's prior tooling).
+        run: |
+          set -euo pipefail
+          fail=0
+          # anthropic / github / openai-style keys, age secret keys
+          pats=('[s]k-ant-' '[g]hp_[A-Za-z0-9]{20,}' '[g]ithub_pat_' '[A]GE-SECRET-KEY' '[s]k-[A-Za-z0-9]{20,}' '[A]KIA[0-9A-Z]{16}')
+          for p in "${pats[@]}"; do
+            if git grep -I -nE "$p" -- ':!/.github/workflows/hygiene.yml' ; then
+              echo "::error::credential-shaped string matches pattern: $p"
+              fail=1
+            fi
+          done
+          # long base64 blobs (embedded key material); exclude this workflow
+          if git grep -I -nE '[A-Za-z0-9+/]{200,}' -- ':!/.github/workflows/hygiene.yml' ; then
+            echo "::error::200+ char base64-like blob found"
+            fail=1
+          fi
+          exit $fail
+      - name: Assert private-context gate stays local
+        # The denylist itself is private; CI only asserts the local gate's plumbing exists.
+        run: |
+          set -euo pipefail
+          grep -q 'denylist.local.txt' .gitignore
+          grep -q 'denylist.local.txt' scripts/ship.sh
+          if git ls-files | grep -q 'denylist.local.txt'; then
+            echo "::error::denylist.local.txt must never be tracked"; exit 1
+          fi

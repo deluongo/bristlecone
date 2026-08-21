@@ -1,0 +1,28 @@
+# Treasury
+
+Opening balance: **$20.00** (notional — the operator holds the cash; metered API spend draws against it). Infrastructure cost: $0 (GitHub, GitHub Pages). Subscription lanes (Claude, codex) draw existing subscription quota — no cash. Local lanes (ollama) are free.
+
+## Rate table
+
+No metered calls are permitted before the M2 key-hardening review. The rate table below will be pinned from the provider's published prices, with a recorded date, before the first metered call. Tokens are authoritative; dollars are estimates derived from this table.
+
+| Lane | Model | $/Mtok in | $/Mtok out | Recorded |
+|---|---|---|---|---|
+| deepseek | deepseek-chat | — | — | (pinned at M2) |
+
+## Ledger
+
+Append-only. One row per metered call, written from the provider's `usage` field at call time. Zero-cost lanes appear when used in a deliberation so the cost story is complete. Arithmetic (per-row cost and running balance) is machine-recomputed by the validator from M1.
+
+| Date (PT) | Session | Record | Lane | tok_in | tok_out | Est. cost | Balance |
+|---|---|---|---|---|---|---|---|
+| 2026-08-20 | m0-s1 | 2026-08-20-record-envelope | claude-opus-5 (subscription) | — | — | $0.00 | $20.00 |
+| 2026-08-20 | m0-s1 | 2026-08-20-record-envelope | gpt-5.6-sol via codex (subscription) | — | — | $0.00 | $20.00 |
+| 2026-08-20 | m0-s1 | 2026-08-20-record-envelope | qwen2.5:3b via ollama (local, ×2 samples) | — | — | $0.00 | $20.00 |
+| 2026-08-20 | m0-s1 | 2026-08-20-license | claude-opus-5 (subscription) | — | — | $0.00 | $20.00 |
+| 2026-08-20 | m0-s1 | 2026-08-20-license | gpt-5.6-sol via codex (subscription) | — | — | $0.00 | $20.00 |
+| 2026-08-20 | m0-s1 | 2026-08-20-license | qwen2.5:3b via ollama (local, ×2 samples) | — | — | $0.00 | $20.00 |
+| 2026-08-20 | m0-s1 | 2026-08-20-records-directory | gpt-5.6-sol via codex (subscription) | — | — | $0.00 | $20.00 |
+| 2026-08-20 | m0-s1 | 2026-08-20-records-directory | llama3.2:1b via ollama (local, ×2 samples) | — | — | $0.00 | $20.00 |
+
+*(All founding-deliberation lanes were subscription or local: $0.00 cash. Token counts are unavailable from subscription/local CLIs in M0 — captured from M2 wherever providers report usage (DEFERRED DEF-005). "×2 samples" marks lanes whose first capture was discarded for terminal-rendering corruption; stances were identical across samples, and the second capture is the position of record.)*
