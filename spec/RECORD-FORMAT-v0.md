@@ -43,6 +43,7 @@ Each `[[positions]]` table:
 - REQUIRED: `by` — free-string display attribution (e.g. `"qwen2.5:3b-instruct via ollama"`). The only per-position requirement, so a hand-writer writes one line.
 - OPTIONAL: `stance` (an option `id`, or `"abstain"`), `label` (pairs the position with a `## Position: <label>` body section), and structured attribution: `vendor`, `model`, `model_version`, `route` (`subscription-cli | api | local | human`), `lane`, `params` (inline table), `gathered` (how the position was collected, e.g. `"manual paste"`).
 - Strict validators require the structured fields on positions carrying a `lane` key (tool-filled ⇒ fully attributed); hand-filled positions may stay minimal.
+- Capture honesty (learned hand-writing the founding records): a corrupted, invalid, or discarded capture SHOULD be noted in `gathered` (or preserved in the body) rather than silently resampled — failed lanes are marked failed, never repaired or fabricated. When a model answers with an option's ordinal or a paraphrase, the writer MAY normalize `stance` to the option `id`, noting the normalization in `gathered` and preserving the reply verbatim in the body.
 
 `[outcome]`:
 
@@ -73,7 +74,11 @@ A record on the default branch in a terminal status (`decided`, `unresolved`, `s
 
 Enforcement in this repository: convention (this section), a CI check over `git diff` that fails deletions/renames under `records/` and illegal modifications to frozen records (from M1), no-force-push branch protection, and first-introduced commit SHAs stamped on rendered pages.
 
-## 5. Conformance
+## 5. Examples
+
+Worked fixtures live in [`spec/examples/`](examples/): `valid/` is a small consistent mini-archive covering all three types (including the must-ignore rule and a computed dissent); `invalid/` fixtures each fail validation for exactly one labeled reason (see its README). They are fixtures, not records of any archive, and double as the validator's test corpus.
+
+## 6. Conformance
 
 - **Record writers** (humans or tools): produce files satisfying §1–§3 required fields. A text editor suffices.
 - **Validators**: fail-closed on required-core violations, status vocabulary, ID grammar, dangling links; honor must-ignore for everything else.

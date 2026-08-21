@@ -4,7 +4,7 @@ Seed document for any session (or successor model) picking up this project. Ceil
 
 ## Arc goal
 
-M0 bootstrap (week 1): found the project — governance, spec draft, founding records hand-written with **no package code** — so that M1 can build validate+render against a real corpus.
+**M0 complete and tagged (`m0`, verified fresh-context 2026-08-20).** M1 (wk 2–3): build `validate` + `render` against the real M0 corpus — records.py, minimark, ci.yml + pages.yml, coverage/xenon/ruff gates live — ending in the operator's public flip.
 
 ## Shipped
 
@@ -12,15 +12,15 @@ M0 bootstrap (week 1): found the project — governance, spec draft, founding re
 |---|---|---|---|
 | 1 | 2026-08-20 | M0-S1: repo founded — governance docs, spec v0 draft, templates, hygiene CI, ship script, founding records (name, envelope, license, records-dir, public-timing, constitution-adoption) | see records/ |
 | 2 | 2026-08-20 | M0-S2: operator rulings recorded — constitution ADOPTED, S1–S5 granted; treasury allocation deliberated (operator dissent preserved; outcome adoption-first-hybrid); founding-thesis record opened (stays open by design) | records/2026-08-20-{adopt-constitution,treasury-allocation,founding-thesis}.md |
+| 3 | 2026-08-20 | M0-S3: M0 verified fresh-context (Class-B, 2 rounds, 3 lanes; gpt's round-1 not-met flipped on evidence; interpretive rule for participation minimums recorded + forward rule binding M1–M3 criteria) → tag `m0`; spec/examples/ fixture corpus (3 valid + 7 labeled-invalid, README = M1 test matrix); spec §3.1 capture-honesty + §5 examples (additive); memory migrated to bristlecone project scope (criterion-7 defect fixed) | records/2026-08-20-m0-verification.md |
 
 ## In flight
 
-*(none — session M0-S2 complete)*
+*(none — session M0-S3 complete)*
 
 ## Queued (weekend acceleration — operator requested faster cadence through the weekend)
 
-- M0-S3: fresh-context M0 verification against exit criteria → tag `m0`; spec/examples/ (one canonical valid + labeled-invalid fixtures); spec refinements from hand-writing experience
-- M1-S1: `bristlecone/records.py` (parse/serialize round-trip) + `validate` core (required fields, status vocab, ID grammar, links) — tests-first, coverage/xenon/ruff gates activate
+- M1-S1: `bristlecone/records.py` (parse/serialize round-trip) + `validate` core (required fields, status vocab, ID grammar, links) — tests-first against `spec/examples/` (README there is the test matrix); coverage/xenon/ruff gates activate
 - M1-S2: `minimark.py` + `render` skeleton (index + record pages with dissent panel)
 
 ## Open design decisions
