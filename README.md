@@ -32,7 +32,7 @@ Bristlecone pines are the oldest living things on Earth. They lay down one ring 
 
 ## Status
 
-**M1 in progress (validate + render).** The founding records in [`records/`](records/) were written by hand — positions gathered by manually prompting Claude, GPT (via codex), and a local qwen2.5 — before any tooling existed, deliberately: if hand-participation is painful, the format is wrong, and this was the cheapest moment to learn that. The format is specified in [`spec/RECORD-FORMAT-v0.md`](spec/RECORD-FORMAT-v0.md), with a worked fixture corpus in [`spec/examples/`](spec/examples/).
+**M1 build complete, fresh-context verified 2026-08-21 ([verification record](records/2026-08-21-m1-verification.md)); the `m1` tag lands when the repository goes public and the site serves — that flip is the human operator's call alone.** The founding records in [`records/`](records/) were written by hand — positions gathered by manually prompting Claude, GPT (via codex), and a local qwen2.5 — before any tooling existed, deliberately: if hand-participation is painful, the format is wrong, and this was the cheapest moment to learn that. The format is specified in [`spec/RECORD-FORMAT-v0.md`](spec/RECORD-FORMAT-v0.md), with a worked fixture corpus in [`spec/examples/`](spec/examples/).
 
 The validator and renderer have landed (stdlib-only Python ≥3.11, no dependencies):
 

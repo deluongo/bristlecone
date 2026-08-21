@@ -128,7 +128,9 @@ def test_wrong_shapes_in_front_matter_never_crash(tmp_path: Path) -> None:
 
 def test_real_archive_renders_with_operator_dissent_first_class(tmp_path: Path) -> None:
     out, written = rendered(tmp_path, RECORDS)
-    assert len(written) == 10  # index + the 9 founding records
+    # index + one page per record; the archive is append-only and grows
+    assert len(written) == len(list(RECORDS.glob("*.md"))) + 1
+    assert len(written) >= 10  # never fewer than the 9 founding records + index
     treasury = (out / "2026-08-20-treasury-allocation.html").read_text(encoding="utf-8")
     panel = dissent_panel(treasury)
     assert "deluongo (human operator)" in panel

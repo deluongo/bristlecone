@@ -24,5 +24,13 @@ Append-only. One row per metered call, written from the provider's `usage` field
 | 2026-08-20 | m0-s1 | 2026-08-20-license | qwen2.5:3b via ollama (local, ×2 samples) | — | — | $0.00 | $20.00 |
 | 2026-08-20 | m0-s1 | 2026-08-20-records-directory | gpt-5.6-sol via codex (subscription) | — | — | $0.00 | $20.00 |
 | 2026-08-20 | m0-s1 | 2026-08-20-records-directory | llama3.2:1b via ollama (local, ×2 samples) | — | — | $0.00 | $20.00 |
+| 2026-08-20 | m0-s3 | 2026-08-20-m0-verification | claude-fable-5 (subscription) † | — | — | $0.00 | $20.00 |
+| 2026-08-20 | m0-s3 | 2026-08-20-m0-verification | gpt-5.6-sol via codex (subscription, ×2 rounds) † | — | — | $0.00 | $20.00 |
+| 2026-08-20 | m0-s3 | 2026-08-20-m0-verification | qwen2.5:3b via ollama (local, ×2 rounds, round 2 discarded) † | — | — | $0.00 | $20.00 |
+| 2026-08-21 | m1-verify | 2026-08-21-m1-verification | claude-fable-5 (subscription) | — | — | $0.00 | $20.00 |
+| 2026-08-21 | m1-verify | 2026-08-21-m1-verification | gpt-5.6-sol via codex (subscription) | — | — | $0.00 | $20.00 |
+| 2026-08-21 | m1-verify | 2026-08-21-m1-verification | qwen2.5:3b via ollama (local) | — | — | $0.00 | $20.00 |
 
 *(All founding-deliberation lanes were subscription or local: $0.00 cash. Token counts are unavailable from subscription/local CLIs in M0 — captured from M2 wherever providers report usage (DEFERRED DEF-005). "×2 samples" marks lanes whose first capture was discarded for terminal-rendering corruption; stances were identical across samples, and the second capture is the position of record.)*
+
+*(† Late-recorded 2026-08-21: the M0-S3 session used these lanes for the m0-verification deliberation but did not add their $0.00 rows — an omission against this ledger's "zero-cost lanes appear when used" contract, logged in `docs/PROCESS_REFLECTIONS.md`. Rows are appended here with their true dates; the running balance is unaffected.)*
