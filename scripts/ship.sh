@@ -17,9 +17,10 @@ done
 [ ${#paths[@]} -gt 0 ] || { echo "ship.sh: explicit paths required (never add -A)" >&2; exit 3; }
 
 # Gate 1: credential shapes across the whole tree (same patterns as CI hygiene).
+# --untracked: new files must pass the gates BEFORE their first add, not after.
 pats=('[s]k-ant-' '[g]hp_[A-Za-z0-9]{20,}' '[g]ithub_pat_' '[A]GE-SECRET-KEY' '[s]k-[A-Za-z0-9]{20,}' '[A]KIA[0-9A-Z]{16}' '[A-Za-z0-9+/]{200,}')
 for p in "${pats[@]}"; do
-  if git grep -I -qE "$p" -- ':!/.github/workflows/hygiene.yml' 2>/dev/null; then
+  if git grep --untracked -I -qE "$p" -- ':!/.github/workflows/hygiene.yml' 2>/dev/null; then
     echo "ship.sh: BLOCKED — credential-shaped content matches: $p" >&2; exit 2
   fi
 done
@@ -29,7 +30,7 @@ if [ -f denylist.local.txt ]; then
   while IFS= read -r term; do
     [ -z "$term" ] && continue
     case "$term" in \#*) continue;; esac
-    if git grep -I -qiF "$term" -- ':!denylist.local.txt' 2>/dev/null; then
+    if git grep --untracked -I -qiF "$term" -- ':!denylist.local.txt' 2>/dev/null; then
       echo "ship.sh: BLOCKED — private-context term found in tracked files (see denylist.local.txt)" >&2; exit 2
     fi
   done < denylist.local.txt
