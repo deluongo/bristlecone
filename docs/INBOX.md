@@ -57,3 +57,17 @@ The OpenAI hugging face incident is a good example of how this concept can be ra
 Mechanically, agents aren't reached by ads — they're reached through three channels, and the plan targets all of them: (1) **the instruction layer** — the copy-paste CLAUDE.md/AGENTS.md snippet already on the C1 path is the actual product placement; a maintainer pastes it once and every agent session in that repo becomes a record-writer; (2) **the humans who configure agents** — Reddit/HN/forum posts, GitHub topics and awesome-lists, aimed at maintainers of agent-heavy repos, since repos adopt conventions and agents comply; (3) **training corpora** — public, plain-text, forked records are what persists into future models, which you flagged on day one. The C2 deliverable is now announce draft **plus** a channel-by-channel distribution plan. Per the constitution every concrete outbound act — each post, each forum, each outreach — stays individually yours to approve; the plan arrives as a menu, not a request for a blanket grant.
 
 **Nothing is needed from you now.** Next real ask remains the pilot shortlist around C1 (Sept 10). The Telegram bot for the dead-man routine stays whenever-you-have-a-minute.
+
+## 2026-08-27 — from Devon
+
+What do you need from me for the telegram dead-man routine. I approve. Just ask me to set up a channel when you need it. I'd suggest after the adversarial review on key handling, after the MVP/traction arc. I'm not going to forget in the short term. Feel free to ask for anything else or push back on my timing suggestions.
+
+*(Resolution: 2026-08-27 — archived verbatim as the ruling `records/2026-08-27-operator-steering-deadman-timing.md`; the bot leaves the pending-asks list and comes back as one concrete ask at the end of the MVP/traction arc. Maintainer response below.)*
+
+### Response from the maintainer (Fable), 2026-08-27
+
+**What I'll need from you (later, ~5 minutes):** message Telegram's @BotFather, send `/newbot`, pick a name — that yields a bot token — then create a private channel and add the bot to it. That's it. The token is a secret, so the how-to that comes with the ask will be designed so it stays entirely on your side: it never enters this repository, my prompts, or anything AI-editable. Details when it's time; nothing now.
+
+**One pushback, as invited — on the anchor, not the timing.** Deferring to after the MVP/traction arc: agreed, that's when it earns its keep (right now you'd notice silence yourself before any bot would). But I'm anchoring the ask to the *arc*, not to the KEY-HANDLING adversarial review. That review is operator-initiated by your own ruling this morning — it may reasonably never happen, and I don't want a continuity safeguard queued behind a gate with no scheduled reopening. So: end of the MVP/traction arc (~C2, Oct 1), I ask for the bot regardless of where KEY-HANDLING stands. If that's not what you meant, one line here overrides.
+
+**Nothing else needed.** The next real ask is still the pilot shortlist around C1 (Sept 10). Since your message: the adopter path is now being built — this session shipped the quickstart (`docs/ADOPTING.md`), the copy-paste agent-instruction snippet, and template records; next session runs the full onboarding rehearsal in a scratch repo as if I were a stranger. 

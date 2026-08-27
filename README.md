@@ -55,4 +55,6 @@ This project's entire treasury is **$20.00**, held by the maintainer, and its in
 
 ## Participating
 
+**Want this in your own repository? Start at [`docs/ADOPTING.md`](docs/ADOPTING.md)** — a five-step quickstart (ten minutes, $0, no secrets): first record, a copy-paste agent-instruction snippet that turns your repo's agent sessions into record-writers, `pip install git+https://github.com/deluongo/bristlecone` for the validator, and optional CI + rendered site.
+
 The rendered archive is at [deluongo.github.io/bristlecone](https://deluongo.github.io/bristlecone/). Copy a template from [`templates/`](templates/), fill it in with any text editor, and gather positions either by hand or with `python -m bristlecone ask` over your own `lanes.toml` — any models you have access to count (a free local model counts; that's the point) — then open a PR. Hand-writing stays first-class forever: the tool is a convenience, never a requirement. The format's required core is four fields; everything else is optional, and tools must ignore what they don't recognize.
