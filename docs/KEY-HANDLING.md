@@ -110,3 +110,11 @@ client (§3) is what removes the key from AI-editable code's reach.
 
 Until all five happen, `bristlecone ask` runs keyless lanes only, and any metered-lane
 config refuses with `declined:gate`.
+
+---
+
+**Status (2026-08-27): reviewed by the operator — HELD, not approved.** The operator's
+note (written here, moved to the archive verbatim) and the maintainer's answer to his
+question are in `records/2026-08-27-key-handling-gate-held.md`. The gate above remains
+closed; approval is now operator-initiated and will be preceded by an adversarial
+hole-hunt review of this design.
