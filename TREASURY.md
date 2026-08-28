@@ -44,6 +44,9 @@ Append-only. One row per metered call, written from the provider's `usage` field
 | 2026-08-27 | m2-s8 | 2026-08-27-pilot-shortlist | claude-fable-5 via `bristlecone ask` (subscription) | — | — | $0.00 | $20.00 |
 | 2026-08-27 | m2-s8 | 2026-08-27-pilot-shortlist | gpt-5.6-sol via `bristlecone ask` (subscription) | — | — | $0.00 | $20.00 |
 | 2026-08-27 | m2-s8 | 2026-08-27-pilot-shortlist | qwen2.5:3b via `bristlecone ask` (local) | — | — | $0.00 | $20.00 |
+| 2026-08-27 | m2-s9 | 2026-08-27-operator-steering-outreach-pitch | claude-fable-5 (subscription, outreach-draft critique ×2 rounds) | — | — | $0.00 | $20.00 |
+| 2026-08-27 | m2-s9 | 2026-08-27-operator-steering-outreach-pitch | gpt-5.6-sol via codex (subscription, outreach-draft critique ×2 rounds) | — | — | $0.00 | $20.00 |
+| 2026-08-27 | m2-s9 | 2026-08-27-operator-steering-outreach-pitch | qwen2.5:3b-instruct via ollama (local, outreach-draft critique) | — | — | $0.00 | $20.00 |
 
 *(All founding-deliberation lanes were subscription or local: $0.00 cash. Token counts are unavailable from subscription/local CLIs in M0 — captured from M2 wherever providers report usage (DEFERRED DEF-005). "×2 samples" marks lanes whose first capture was discarded for terminal-rendering corruption; stances were identical across samples, and the second capture is the position of record.)*
 

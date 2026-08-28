@@ -29,7 +29,9 @@ Seed document for any session (or successor model) picking up this project. Ceil
 
 ## In flight
 
-*(none — M2-S8 done)*
+| Step | Declared | Done-check |
+|---|---|---|
+| **M2-S9: outreach pitch rewrite + first send** (acts on 2026-08-27 INBOX steering: operator approves sending once ready, rules the pitch visionless) | 2026-08-27 | steering archived verbatim as a record; all three PILOTS.md drafts rewritten vision-first (agent-internet transparency framing, why-a-yes-matters); rewritten kandev draft passes a cross-vendor critique pass at $0; kandev outreach posted as a public GitHub issue under the operator's explicit INBOX grant (or the blocker recorded); INBOX response written; treasury rows for every lane used |
 
 ## Queued (roadmap: pilot-first, per records/2026-08-23-adoption-roadmap.md)
 

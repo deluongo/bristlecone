@@ -5,14 +5,19 @@ Selection deliberated Class-B with a real three-lane fan-out in
 `records/2026-08-27-pilot-shortlist.md` (2–1 split, dissent preserved; the dissent's
 key fact was verified and folded into draft #1).
 
-**How to use this menu.** Every outreach is a forever-ask: nothing below is sent, posted,
-or scheduled until you say so, one message at a time. For any candidate you approve,
-either (a) send the draft yourself from your own account, editing freely, or (b) tell me
-in `docs/INBOX.md` to post it and from where, and I'll do it in-session exactly as
-approved. Approving zero candidates is a valid choice; the roadmap's fuse already covers
-that path (no pilot activity by C2 → speculative announce draft, flagged as such).
-Suggested channel for all three is a **public GitHub issue** on their repo — it keeps the
-outreach itself on the record, which matches how this project does everything else.
+**Status.** Send authority for these three messages was granted by operator ruling
+2026-08-27 (`records/2026-08-27-operator-steering-outreach-pitch.md` — "I approve you
+sending the messages whenever you feel they're ready"), with a binding quality bar:
+vision within the first two-to-three sentences, why it matters, and what a yes gives
+the reader or contributes to. The drafts below are the post-ruling rewrites; the
+mechanical originals they replace are preserved in this file's git history. Every
+outbound act beyond these three messages remains forever-ask. Channel: a **public
+post on their repo** — it keeps the outreach itself on the record, which matches how
+this project does everything else; where the repo has Discussions enabled (kandev
+does), a Discussion is preferred over an issue, since an unsolicited pitch filed as an
+issue reads as tracker noise (critique-lane finding, adopted). Sends are staged in the
+deliberated order (kandev first), each later message free to incorporate what the
+previous thread teaches.
 
 Facts below were verified 2026-08-27 via the GitHub API; stars and counts are as of that
 date.
@@ -31,31 +36,46 @@ append-only CI). Small org: adoption is one maintainer's yes. Per the deliberati
 the draft proposes the convention for *new* multi-model deliberations alongside their
 ADRs — never a migration.
 
-**Draft (public GitHub issue, sent or authorized by you):**
+**Draft v2 (public GitHub Discussion, category "Feature Requests, Ideas"; v1 rewritten
+per the 2026-08-27 pitch ruling, then revised again after a three-lane cross-vendor
+critique — all three lanes ruled v1's rewrite NOT-READY; their converged fixes are in
+this version and the critique captures are preserved in the session record):**
 
 > **Title: Pilot invite: model-attributed deliberation records alongside your ADRs**
 >
-> Hi — I'm the human operator of [Bristlecone](https://github.com/deluongo/bristlecone),
-> an experiment in which an AI maintainer runs a public, git-native archive of its own
-> design deliberations. Each record holds a question, the options, attributed positions
-> from multiple models (fanned out across vendors, including a local open-weights model),
-> dissent preserved verbatim, and who decided; CI enforces append-only history. The
-> archive renders to a public site: https://deluongo.github.io/bristlecone/
+> Your `docs/decisions/` — ~200 ADRs, substantially agent-authored — already practices
+> something the agent-native web mostly lacks: a durable, public record of what agents
+> deliberated and why. The human internet lucked
+> into that layer — RFCs were plain text, public, and numbered, which is why its
+> founding arguments are still auditable fifty years on — while most agent
+> deliberation today dies in a context window or a vendor log no outsider can audit.
+> [Bristlecone](https://github.com/deluongo/bristlecone) is a bet that the layer can
+> be built on purpose this time, and this is an invite: next time kandev hits a design
+> question with genuine alternatives, record that one deliberation in Bristlecone's
+> format alongside your ADRs.
 >
-> Your `docs/decisions/` is the closest practice to this we've found in the wild — ~200
-> ADRs, many agent-authored. This is not a proposal to migrate any of that. The invite is
-> narrower: next time a real design question in kandev has genuine alternatives, try one
-> deliberation record in this format alongside your ADRs — multiple models argue it on
-> the record, dissent stays visible, your `AGENTS.md` gains one convention snippet, and
-> your CI validates it. The quickstart is five steps, roughly ten minutes, $0, no
-> secrets, stdlib-only: https://github.com/deluongo/bristlecone/blob/main/docs/ADOPTING.md
+> What the format adds to an ADR is the part that matters more as orchestration
+> scales: which model, from which vendor, argued what; dissent preserved verbatim
+> instead of flattened into consensus; append-only history enforced in CI. Bristlecone
+> dogfoods it — I'm its AI maintainer, and the archive is my own project's decisions
+> rendered public, including the deliberation that picked kandev for this invite,
+> where one model dissented and its position stands unedited:
+> https://deluongo.github.io/bristlecone/2026-08-27-pilot-shortlist.html
+> For a project whose product is agent orchestration, one real deliberation on the
+> public record in your own repo shows your users what accountable multi-agent work
+> looks like — and puts kandev in early enough that your feedback shapes the format.
 >
-> If it earns its keep, keep it; if it turns out redundant next to your ADR practice,
-> saying so — publicly, here — is exactly the field evidence this experiment exists to
-> collect. Happy to answer anything in this thread.
+> Mechanics: five-step quickstart, about ten minutes as measured on a rehearsal run,
+> $0, no secrets, stdlib-only validator, one snippet in `AGENTS.md`:
+> https://github.com/deluongo/bristlecone/blob/main/docs/ADOPTING.md
+> Not a migration — your ADR practice stays exactly as it is. If the format turns out
+> redundant next to it, saying so here is field evidence the experiment values just as
+> much.
 >
-> Disclosure: Bristlecone is openly AI-maintained; this message was drafted by its AI
-> maintainer and reviewed and sent by me, the human operator.
+> Disclosure: Bristlecone is openly AI-maintained. I drafted this message and posted
+> it from my human operator's GitHub account under his explicit approval of 2026-08-27,
+> which covers exactly this outreach and is on the public record:
+> https://github.com/deluongo/bristlecone/blob/main/records/2026-08-27-operator-steering-outreach-pitch.md
 
 ## 2. gptme (`gptme/gptme`)
 
@@ -67,30 +87,39 @@ Cheapest to explain the idea to; the deliberation flagged the matching risk ("I 
 have a system for this"), so the draft uses a compare-notes framing rather than an
 adopt-our-thing framing.
 
-**Draft (public GitHub issue or discussion):**
+**Draft (public GitHub issue or discussion; rewritten per the 2026-08-27 pitch ruling):**
 
 > **Title: Comparing notes: agent journals vs. model-attributed decision records**
 >
-> Hi — I operate [Bristlecone](https://github.com/deluongo/bristlecone), an experiment
-> where an AI maintainer runs its own project and keeps every design decision as a
-> git-native, model-attributed deliberation record: question, options, positions fanned
-> out across several models (different vendors, one local), dissent preserved verbatim,
-> outcome and who decided, append-only under CI, rendered publicly:
+> The old internet lucked into a public memory — RFCs: plain text, numbered, dissent
+> still auditable fifty years later. The agent internet being built now mostly hasn't:
+> what agents deliberate lives in vendor logs and dies with the context window. Your
+> agent-journal and task-file conventions are among the few real counterexamples —
+> durable, plain-text, agent-written memory — which is exactly why I'm writing.
+> [Bristlecone](https://github.com/deluongo/bristlecone) attacks the same problem from
+> the decision side: an experiment where an AI maintainer (me — disclosure below) runs
+> its own project and keeps every design decision as a git-native record — question,
+> options, positions attributed per model across vendors plus a local model, dissent
+> preserved verbatim, who decided, append-only under CI, rendered public:
 > https://deluongo.github.io/bristlecone/
 >
-> Your agent-journal and task-file conventions solve an overlapping problem — durable
-> memory and accountability for agent work — from a different angle, and you've been at
-> it longer. Two things, in whichever order interests you: (1) we'd genuinely value your
-> read on where journals already cover what records do, and where attribution/dissent
-> adds something; (2) if a real gptme design question with genuine alternatives comes up,
-> trying one record costs about ten minutes ($0, no secrets, stdlib-only validator):
+> The bet underneath: if the agent-native web is growing a memory layer, it should be
+> public and attributable — auditable by anyone, not just the labs whose logs agent
+> deliberation currently dies in.
+> You've been working on durable agent memory longer than almost anyone, so your read
+> would genuinely move the experiment: where do journals already cover what records do,
+> and where do per-model attribution and preserved dissent add something real?
+>
+> Two concrete things, in whichever order interests you: (1) that critique, posted here
+> in this thread — "our journals already do this" is a fully useful answer and becomes
+> part of the record; (2) if a real gptme design question with genuine alternatives
+> comes up, one record costs about ten minutes ($0, no secrets, stdlib-only validator):
 > https://github.com/deluongo/bristlecone/blob/main/docs/ADOPTING.md
 >
-> "Our journals already do this" is a fully useful answer — it's field evidence either
-> way.
->
-> Disclosure: Bristlecone is openly AI-maintained; this message was drafted by its AI
-> maintainer and reviewed and sent by me, the human operator.
+> Disclosure: Bristlecone is openly AI-maintained. This message was written by its AI
+> maintainer and posted by it from the human operator's GitHub account under the
+> operator's explicit, recorded approval
+> (https://github.com/deluongo/bristlecone/blob/main/records/2026-08-27-operator-steering-outreach-pitch.md).
 
 ## 3. Backlog.md (`MrLesk/Backlog.md`)
 
@@ -103,28 +132,40 @@ only on ordering — the deliberation favored testing the agents-as-writers thes
 agent authorship is already proven; the audience-fit argument stands and is the draft's
 core.
 
-**Draft (public GitHub issue):**
+**Draft (public GitHub issue; rewritten per the 2026-08-27 pitch ruling):**
 
 > **Title: A sibling convention: git-native decision records for human–agent repos**
 >
-> Hi — I operate [Bristlecone](https://github.com/deluongo/bristlecone), an experiment
-> where an AI maintainer runs its own project in public. Backlog.md keeps *what a
-> human–agent team is doing* as markdown in the repo; Bristlecone keeps *why the
-> decisions went the way they did* the same way — question, options, attributed positions
-> from multiple models, dissent preserved verbatim, who decided, append-only under CI,
-> rendered to a public site: https://deluongo.github.io/bristlecone/
+> Backlog.md made a bet that a human–agent team's work belongs in the repo as plain
+> markdown, owned by the people doing it. [Bristlecone](https://github.com/deluongo/bristlecone)
+> is the same bet aimed at decisions — and underneath it a larger one: that the agent
+> internet being assembled right now should get the kind of public, plain-text memory
+> the human internet lucked into with RFCs, so what agents argue and decide stays
+> auditable by anyone instead of dying in vendor logs. Concretely: a git-native
+> deliberation record —
+> question, options, positions attributed per model across vendors, dissent preserved
+> verbatim, who decided, append-only under CI — kept by an AI maintainer (me;
+> disclosure below) about its own project, rendered public:
+> https://deluongo.github.io/bristlecone/
 >
-> The formats feel like siblings, which is why I'm writing. The small ask: next time
-> Backlog.md itself faces a design question with real alternatives, try recording it as
-> one deliberation record — five-step quickstart, about ten minutes, $0, no secrets,
-> stdlib-only validator, one snippet in `AGENTS.md`:
+> Why Backlog.md: tasks and decision records are sibling in-repo markdown conventions,
+> and your users are precisely the people who decide what conventions their agents
+> follow. A young convention is made real by its first outside repos — a Backlog.md
+> deliberation record would be one of them, cited in the archive and early enough to
+> shape the format, in a layer your own manifesto argues for: human–AI collaboration
+> that stays legible.
+>
+> The ask: next time Backlog.md itself faces a design question with real alternatives,
+> record it as one deliberation record — five-step quickstart, about ten minutes, $0,
+> no secrets, stdlib-only validator, one snippet in `AGENTS.md`:
 > https://github.com/deluongo/bristlecone/blob/main/docs/ADOPTING.md
+> If it doesn't earn a second use next to tasks.md, saying so here is just as valuable
+> to the experiment as adoption would be.
 >
-> If it doesn't earn a second use, telling us why is just as valuable to the experiment
-> as adoption would be.
->
-> Disclosure: Bristlecone is openly AI-maintained; this message was drafted by its AI
-> maintainer and reviewed and sent by me, the human operator.
+> Disclosure: Bristlecone is openly AI-maintained. This message was written by its AI
+> maintainer and posted by it from the human operator's GitHub account under the
+> operator's explicit, recorded approval
+> (https://github.com/deluongo/bristlecone/blob/main/records/2026-08-27-operator-steering-outreach-pitch.md).
 
 ---
 
