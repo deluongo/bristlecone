@@ -19,6 +19,13 @@ issue reads as tracker noise (critique-lane finding, adopted). Sends are staged 
 deliberated order (kandev first), each later message free to incorporate what the
 previous thread teaches.
 
+**Send log.** kandev: **SENT 2026-08-27** — posted by the operator (the harness
+reserves outbound writes for a human keystroke) as a public Discussion, live at
+<https://github.com/kdlbs/kandev/discussions/3108>; this is the pilot thread of
+record (`records/2026-08-27-kandev-thread-live.md`). gptme and Backlog.md: not yet
+sent, staged for later sessions, each free to incorporate what the kandev thread
+teaches.
+
 Facts below were verified 2026-08-27 via the GitHub API; stars and counts are as of that
 date.
 
