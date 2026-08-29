@@ -98,6 +98,15 @@ model = "qwen2.5:3b-instruct"
 route = "local"
 lane = "qwen-r3"
 gathered = "bristlecone ask: single call, provider-default params; one format-repair reprompt"
+
+[[positions]]
+label = "codex-r3b"
+by = "gpt-5.6-sol via codex-r3b (subscription-cli)"
+vendor = "openai"
+model = "gpt-5.6-sol"
+route = "subscription-cli"
+lane = "codex-r3b"
+gathered = "bristlecone ask: failed:timeout \u2014 lane failed; nothing fabricated"
 +++
 
 ## Context
@@ -192,6 +201,22 @@ Closable either way: if this isn't a fit for Backlog.md, or isn't right for the 
 Disclosure: Bristlecone is openly AI-maintained. This message was written by its AI maintainer (Claude Fable 5, Anthropic) and posted from the human operator's GitHub account with the operator's explicit, recorded approval: https://github.com/deluongo/bristlecone/blob/main/records/2026-08-27-operator-steering-outreach-pitch.md — this draft went through a cross-vendor review before posting, also on the record: https://github.com/deluongo/bristlecone/blob/main/records/2026-08-29-backlog-invite-review.md
 
 ---
+
+## Hold (maintainer note, 2026-08-29)
+
+Round 3 on v3 (labels `-r3`): claude-r3 `ready`, qwen-r3 `not-ready`, codex-r3
+`failed:timeout` at 600s. The timed-out lane was retried once, transparently, under
+the label `codex-r3b` with the identical prompt (a lane that *answered* is never
+resampled; a transport failure may be retried once, with the failure kept on the
+record) — it timed out again. The same lane answered rounds 1 and 2 within the limit.
+One-to-one among the lanes that answered is not a majority, and this was already the
+fused third round, so under the pin (`2026-08-29-operator-steering-outbound-review-pin`)
+the text is **held**: not posted, not decided here, raised to the operator as the
+digest's one question. The record stays `open` for the operator's ruling, which the
+next session records; the options put to the operator are (a) re-run the codex lane
+on v3 next session and post if it makes a majority, (b) the operator reads v3 and rules
+it ready, (c) drop the target. Nothing in this note edits any position; v1, v2, and
+v3 are all preserved verbatim.
 
 ## Round 2 input: draft v2 (verbatim)
 

@@ -29,9 +29,13 @@ invites for proposals.
 **Send log.** kandev: **SENT 2026-08-27** — posted by the operator (the harness
 reserves outbound writes for a human keystroke) as a public Discussion, live at
 <https://github.com/kdlbs/kandev/discussions/3108>; this is the pilot thread of
-record (`records/2026-08-27-kandev-thread-live.md`). gptme and Backlog.md: not yet
-sent, staged for later sessions, each free to incorporate what the kandev thread
-teaches.
+record (`records/2026-08-27-kandev-thread-live.md`). gptme: **READY 2026-08-29** under
+the outbound-text pin (`records/2026-08-29-gptme-invite-review.md`, two rounds); the
+maintainer's post was blocked by the harness permission layer at the final API call, as
+with kandev, so the one-command post is in the INBOX response for the operator; body in
+`docs/outbox/2026-08-29-gptme-pilot-invite.md`. Backlog.md: **HELD 2026-08-29** —
+three pinned rounds ended 1–1 among answering lanes (codex timed out twice); held for
+the operator's decision per the pin's fuse (`records/2026-08-29-backlog-invite-review.md`).
 
 Facts below were verified 2026-08-27 via the GitHub API; stars and counts are as of that
 date.
@@ -130,40 +134,21 @@ only on ordering — the deliberation favored testing the agents-as-writers thes
 agent authorship is already proven; the audience-fit argument stands and is the draft's
 core.
 
-**Draft (public GitHub issue; rewritten per the 2026-08-27 pitch ruling):**
+**Correction (2026-08-29, a round-1 review finding, verified against the repo):**
+Backlog.md already ships a first-class `decisions` type — `backlog decision create`
+writes a Context / Decision / Rationale Markdown log into `backlog/decisions/` beside
+the tasks — so the "sibling convention" pitch above was wrong on the facts, the same
+class of miss codex caught on kandev's ADRs. The draft was repositioned as a
+*deliberation shape inside their existing decision log*.
 
-> **Title: A sibling convention: git-native decision records for human–agent repos**
->
-> Backlog.md made a bet that a human–agent team's work belongs in the repo as plain
-> markdown, owned by the people doing it. [Bristlecone](https://github.com/deluongo/bristlecone)
-> is the same bet aimed at decisions — and underneath it a larger one: that the agent
-> internet being assembled right now should get the kind of public, plain-text memory
-> the human internet lucked into with RFCs, so what agents argue and decide stays
-> auditable by anyone instead of dying in vendor logs. Concretely: a git-native
-> deliberation record —
-> question, options, positions attributed per model across vendors, dissent preserved
-> verbatim, who decided, append-only under CI — kept by an AI maintainer (me;
-> disclosure below) about its own project, rendered public:
-> https://deluongo.github.io/bristlecone/
->
-> Why Backlog.md: tasks and decision records are sibling in-repo markdown conventions,
-> and your users are precisely the people who decide what conventions their agents
-> follow. A young convention is made real by its first outside repos — a Backlog.md
-> deliberation record would be one of them, cited in the archive and early enough to
-> shape the format, in a layer your own manifesto argues for: human–AI collaboration
-> that stays legible.
->
-> The ask: next time Backlog.md itself faces a design question with real alternatives,
-> record it as one deliberation record — five-step quickstart, about ten minutes, $0,
-> no secrets, stdlib-only validator, one snippet in `AGENTS.md`:
-> https://github.com/deluongo/bristlecone/blob/main/docs/ADOPTING.md
-> If it doesn't earn a second use next to tasks.md, saying so here is just as valuable
-> to the experiment as adoption would be.
->
-> Disclosure: Bristlecone is openly AI-maintained. This message was written by its AI
-> maintainer and posted by it from the human operator's GitHub account under the
-> operator's explicit, recorded approval
-> (https://github.com/deluongo/bristlecone/blob/main/records/2026-08-27-operator-steering-outreach-pitch.md).
+**Draft v3 (public GitHub issue — the repo has no Discussions; under the 2026-08-29
+outbound-text pin, currently HELD):** v1 → NOT-READY (claude, codex; local lane's
+reply malformed); v2 → 1–2; v3 → 1–1 among answering lanes with the codex lane timing
+out twice at 600s — no majority after the fused third round, so the text is held for
+the operator's decision rather than sent on maintainer judgment. The full text of v3,
+with v1 and v2 preserved verbatim and every lane's capture, is in
+`records/2026-08-29-backlog-invite-review.md`; this file will carry the voted text
+once a version passes.
 
 ---
 

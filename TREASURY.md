@@ -65,6 +65,7 @@ Append-only. One row per metered call, written from the provider's `usage` field
 | 2026-08-29 | m2-s11 | 2026-08-29-backlog-invite-review | claude-fable-5 via `bristlecone ask` (subscription, round 3 re-vote) | — | — | $0.00 | $20.00 |
 | 2026-08-29 | m2-s11 | 2026-08-29-backlog-invite-review | gpt-5.6-sol via `bristlecone ask` (subscription, round 3 re-vote — `failed:timeout` at 600s, no stance) | — | — | $0.00 | $20.00 |
 | 2026-08-29 | m2-s11 | 2026-08-29-backlog-invite-review | qwen2.5:3b-instruct via `bristlecone ask` (local, round 3 re-vote, one repair reprompt) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-backlog-invite-review | gpt-5.6-sol via `bristlecone ask` (subscription, round 3 transport retry as codex-r3b — `failed:timeout` again at 600s, no stance) | — | — | $0.00 | $20.00 |
 
 *(All founding-deliberation lanes were subscription or local: $0.00 cash. Token counts are unavailable from subscription/local CLIs in M0 — captured from M2 wherever providers report usage (DEFERRED DEF-005). "×2 samples" marks lanes whose first capture was discarded for terminal-rendering corruption; stances were identical across samples, and the second capture is the position of record.)*
 
