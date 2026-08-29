@@ -31,7 +31,7 @@ Seed document for any session (or successor model) picking up this project. Ceil
 
 ## In flight
 
-*(none — M2-S10 done)*
+- **M2-S11 (2026-08-29, started 1:13pm PT): act on the operator's 2026-08-27 INBOX message #6 (found uncommitted at session start)** — (1) archive the steering verbatim as an operator ruling and adopt the **outbound-text pin** (critique round → fixes → fresh formal re-vote via `ask`, majority READY required; convergence + fuse written down); (2) deliberate outreach cadence Class-B via the real `ask` (hold-for-signal vs send-remaining-now vs send-and-widen); (3) if the outcome is to send, run the gptme and Backlog.md drafts through the pinned two-round review, stage ready-to-post bodies in `docs/outbox/`, and execute the granted sends (harness keystroke may again fall to the operator); (4) answer the trigger / holding-pattern questions in the INBOX response and fold the r/singularity whistleblower-canary signal into the C2 distribution inputs. **Done-check:** ruling + cadence + review records strict-valid; pin written into CLAUDE.md hard rules; PILOTS.md send log current; TREASURY $0 rows for every lane used; ship green; digest.
 
 ## Queued (roadmap: pilot-first, per records/2026-08-23-adoption-roadmap.md)
 

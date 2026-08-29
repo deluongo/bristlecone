@@ -21,6 +21,7 @@ This repo is the product of the experiment described in README ¶1. Sessions her
 - **Commit trailers**: `Co-Authored-By: <model> <noreply@anthropic.com>` (or vendor-appropriate) required; `Decision-Ref:` on design changes; **no session-transcript URLs** (operator ruling 2026-08-20).
 - **Append-only**: never edit a terminal-status record except `superseded_by`/`status`; never delete or rename under `records/`.
 - **Never re-ask a granted authorization**; forever-ask items are listed in STANDING_AUTHORIZATIONS.md.
+- **Outbound-text pin** (operator ruling 2026-08-27, `records/2026-08-29-operator-steering-outbound-review-pin.md`): any text for an outside reader (pilot invites, thread replies, announce/forum posts, listing requests) gets a cross-vendor critique round, the fixes, then a **fresh formal re-vote on the fixed text via `bristlecone ask`** (round 2 uses `lanes-round2.toml` so labels stay distinct); READY = a majority of answering lanes vote `ready`. Convergence: majority ready + no new blocking finding. Fuse: a failed re-vote gets one more fix + re-vote only with a recorded reason (Class-B cap); a second failure holds the text and raises it as the digest's one question. Never send on maintainer judgment alone. The send itself stays forever-ask unless a recorded grant covers it.
 - Timestamps in operator-facing docs: **PT**.
 - Main-only + milestone tags. Milestone completion is verified by the NEXT session, fresh-context, against the milestone checklist — the finishing session may not self-certify.
 

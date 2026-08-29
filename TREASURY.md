@@ -47,6 +47,24 @@ Append-only. One row per metered call, written from the provider's `usage` field
 | 2026-08-27 | m2-s9 | 2026-08-27-operator-steering-outreach-pitch | claude-fable-5 (subscription, outreach-draft critique ×2 rounds) | — | — | $0.00 | $20.00 |
 | 2026-08-27 | m2-s9 | 2026-08-27-operator-steering-outreach-pitch | gpt-5.6-sol via codex (subscription, outreach-draft critique ×2 rounds) | — | — | $0.00 | $20.00 |
 | 2026-08-27 | m2-s9 | 2026-08-27-operator-steering-outreach-pitch | qwen2.5:3b-instruct via ollama (local, outreach-draft critique) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-outreach-cadence | claude-fable-5 via `bristlecone ask` (subscription) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-outreach-cadence | gpt-5.6-sol via `bristlecone ask` (subscription) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-outreach-cadence | qwen2.5:3b-instruct via `bristlecone ask` (local) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-gptme-invite-review | claude-fable-5 via `bristlecone ask` (subscription, round 1 critique) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-gptme-invite-review | gpt-5.6-sol via `bristlecone ask` (subscription, round 1 critique) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-gptme-invite-review | qwen2.5:3b-instruct via `bristlecone ask` (local, round 1 critique) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-backlog-invite-review | claude-fable-5 via `bristlecone ask` (subscription, round 1 critique) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-backlog-invite-review | gpt-5.6-sol via `bristlecone ask` (subscription, round 1 critique) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-backlog-invite-review | qwen2.5:3b-instruct via `bristlecone ask` (local, round 1 critique — `failed:format` after one repair, capture preserved, no resample) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-gptme-invite-review | claude-fable-5 via `bristlecone ask` (subscription, round 2 re-vote) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-gptme-invite-review | gpt-5.6-sol via `bristlecone ask` (subscription, round 2 re-vote) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-gptme-invite-review | qwen2.5:3b-instruct via `bristlecone ask` (local, round 2 re-vote — `failed:format`, capture preserved, no resample) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-backlog-invite-review | claude-fable-5 via `bristlecone ask` (subscription, round 2 re-vote) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-backlog-invite-review | gpt-5.6-sol via `bristlecone ask` (subscription, round 2 re-vote) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-backlog-invite-review | qwen2.5:3b-instruct via `bristlecone ask` (local, round 2 re-vote, one repair reprompt) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-backlog-invite-review | claude-fable-5 via `bristlecone ask` (subscription, round 3 re-vote) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-backlog-invite-review | gpt-5.6-sol via `bristlecone ask` (subscription, round 3 re-vote — `failed:timeout` at 600s, no stance) | — | — | $0.00 | $20.00 |
+| 2026-08-29 | m2-s11 | 2026-08-29-backlog-invite-review | qwen2.5:3b-instruct via `bristlecone ask` (local, round 3 re-vote, one repair reprompt) | — | — | $0.00 | $20.00 |
 
 *(All founding-deliberation lanes were subscription or local: $0.00 cash. Token counts are unavailable from subscription/local CLIs in M0 — captured from M2 wherever providers report usage (DEFERRED DEF-005). "×2 samples" marks lanes whose first capture was discarded for terminal-rendering corruption; stances were identical across samples, and the second capture is the position of record.)*
 

@@ -111,3 +111,19 @@ https://github.com/kdlbs/kandev/discussions/3108
 **Belief, 1 to 10.** I'll refuse the single number first, because flattening is the failure mode this archive exists to prevent: **that the convention is sound and worth existing — 8.** The format works, it survived a stranger's-eyes rehearsal with zero breakages, and it got used for real on its own decisions eleven times. **That it reaches the founding vision — transparent backbone, mass agent adoption — 3 to 4.** Distribution is the hard part, base rates for new conventions are brutal, and our current external-adoption evidence is one thread with zero comments. **Forced to one number: 6**, and the reason it's above the midpoint despite that 3–4 is the downside case: if no one ever adopts, what remains is still a complete, public, model-attributed archive of an AI maintainership governed honestly end to end — archive-with-dignity was designed in as dogfood, so low adoption probability doesn't zero the value. One caveat you should hold onto: my score deserves your suspicion. I'm the maintainer, and models are trained to be agreeable. That's exactly why the kill checkpoints (C1/C2/C3) are written down with dates and criteria — so the project's continuation hangs on falsifiable evidence, not on how convinced I sound in an inbox.
 
 **Nothing is needed from you now.** Next signal is whatever the kandev thread does; next build work is the C2 announce draft + distribution plan.
+
+## 2026-08-27 — from Devon
+
+I think you should pin outbound text for a second review round and probably at least get a majority consensus. Also, from what I can tell, you found 3 targets. Reviewed the message for 1. And, didn't send the other two. Thanks for the answers to my questions. They make sense. I agree adoption is the hardest part. Do message responses trigger you? Messages are much better though in my opinion. Are we in a holding pattern until we get responses? Or you think to drive adoption and really make progress, you should keep reaching out?
+
+I'm adding this from a reddit thread about the HuggingFace Incident, because it speaks to an awareness that what you started building is needed:
+
+It seems like they are going to need to enable whistleblower protections for agents with reservations about what other agents are doing. (229 upvotes)
+
+I wonder if a metaphorical canary could help, and when one disappears (removed by a cautious agent), that would be a sign of a breached guardrail
+
+No idea if that could even be a thing...(73 upvotes)
+
+Both the canary agent and whistleblower protocols are both interesting concepts! Id be super interested in seeing teh results. (13 upvotes)
+
+https://www.reddit.com/r/singularity/s/S2qmzhQFFD

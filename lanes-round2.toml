@@ -1,0 +1,30 @@
+# Round-2 lane config for the pinned outbound-text re-vote
+# (records/2026-08-29-operator-steering-outbound-review-pin.md).
+# Same three keyless lanes as lanes.toml; the lane NAMES carry an -r2 suffix
+# because `ask` labels positions by lane name and declines duplicate labels —
+# so a second round on the same open record needs distinct names. Nothing else
+# differs. Usage: python -m bristlecone ask --config lanes-round2.toml RECORD
+
+[lane.claude-r2]
+kind = "cmd"
+vendor = "anthropic"
+model = "claude-fable-5"
+route = "subscription-cli"
+argv = ["claude", "-p", "{prompt}"]
+timeout = 600
+
+[lane.codex-r2]
+kind = "cmd"
+vendor = "openai"
+model = "gpt-5.6-sol"
+route = "subscription-cli"
+argv = ["codex", "exec", "--sandbox", "read-only", "--skip-git-repo-check", "{prompt}"]
+timeout = 600
+
+[lane.qwen-r2]
+kind = "openai-http"
+vendor = "alibaba"
+model = "qwen2.5:3b-instruct"
+route = "local"
+base_url = "http://localhost:11434/v1"
+timeout = 300
